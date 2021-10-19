@@ -1,0 +1,29 @@
+#! usr/bin/env python3
+
+'''
+Coded by Md. Almas Ali
+Name: Betar
+Version: 0.0.1
+'''
+import os, argparse
+from sys import argv as arg
+
+parser = argparse.ArgumentParser()
+parser.add_argument('start', type='string',default='', help='y')
+
+if __name__ == '__main__':
+	if str(arg[1]).strip() == '':
+		os.system('ifconfig')
+	elif str(arg[1]).strip() == 'start':
+		if str(arg[2]).strip() == '':
+			print('betar: starting error !')
+		else:
+			try:
+				athree = str(arg[3]).strip()
+				os.system('service network-manager restart')
+				os.system(f"ifconfig {athree} down")
+				os.system(f"iwconfig {athree} mode monitor ")
+				os.system(f"ifconfig {athree} up")
+				os.system('iwconfig')
+			except:
+				print(f"betar: \'{athree}\' named adapter not found.")
